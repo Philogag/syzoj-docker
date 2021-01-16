@@ -6,6 +6,10 @@ RUN apt-get update -y && apt-get install -y ca-certificates curl gnupg && \
 RUN apt-get update -y && apt-get install -y p7zip-full clang-format python-pygments nodejs gcc g++ make libboost-filesystem-dev git
 ADD syzoj /opt/syzoj
 ADD judge-v3 /opt/judge-v3
+
+RUN git clone https://github.com/Philogag/syzoj-docker /opt/syzoj
+RUN git clone https://github.com/syzoj/judge-v3 /opt/judge-v3
+
 WORKDIR /opt/syzoj
 RUN npm install && (node_modules/.bin/tsc || true)
 WORKDIR /opt/judge-v3
