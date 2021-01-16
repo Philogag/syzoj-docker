@@ -14,7 +14,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update -y && apt-get install -y p7zip-full clang-format python-pygments gcc g++ make libboost-filesystem-dev git
 
-RUN git clone https://github.com/Philogag/syzoj-docker /opt/syzoj
+RUN git clone https://github.com/Philogag/syzoj /opt/syzoj
 RUN git clone https://github.com/syzoj/judge-v3 /opt/judge-v3
 
 WORKDIR /opt/syzoj
