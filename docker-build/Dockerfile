@@ -1,4 +1,4 @@
-FROM node:8
+FROM node:10
 
 # fix tzdata install problem
 ENV DEBIAN_FRONTEND noninteractive
