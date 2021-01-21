@@ -12,13 +12,10 @@ ENV DEBIAN_FRONTEND noninteractive
 #     whereis node &&\
 #     whereis npm
 
-RUN apt-get update -y && apt-get install -y p7zip-full clang-format python-pygments gcc g++ make libboost-filesystem-dev git
+RUN apt-get update -y && apt-get install -y p7zip-full clang-format python-pygments libboost-filesystem-dev git
 
 RUN git clone https://github.com/Philogag/syzoj /opt/syzoj
-RUN git clone https://github.com/syzoj/judge-v3 /opt/judge-v3
 
 WORKDIR /opt/syzoj
-RUN npm install && (node_modules/.bin/tsc || true)
-WORKDIR /opt/judge-v3
 RUN npm install && (node_modules/.bin/tsc || true)
 WORKDIR /
