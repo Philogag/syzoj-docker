@@ -8,6 +8,8 @@ services:
       - MYSQL_ROOT_PASSWORD=123456
     volumes:
       - ./data/mysql:/var/lib/mysql
+    ports:
+      - 33061:3306
   redis:
     image: redis:5
     networks:
@@ -20,9 +22,13 @@ services:
     networks:
       - net
   syzoj:
-    image: syzoj/syzoj:base
+    # image: syzoj/syzoj:base
+    image: registry.cn-hangzhou.aliyuncs.com/philogag/syzoj:debug
     networks:
       - net
+    depends_on:
+      - redis
+      - mysql
     volumes:
       - ./config:/opt/config
       - ./data/syzoj:/opt/syzoj/data
@@ -30,17 +36,22 @@ services:
     working_dir: "/opt/syzoj"
     ports:
       - 5283:5283
+    restart: always
   judger:
-    image: syzoj/syzoj:base
+    # image: syzoj/syzoj:base
+    image: registry.cn-hangzhou.aliyuncs.com/philogag/syzoj:debug
     networks:
       - net
+    depends_on:
+      - syzoj
     volumes:
       - ./config:/opt/config
       - ./data/syzoj:/opt/syzoj/data
     working_dir: "/opt/judge-v3"
     command: ["node", "/opt/judge-v3/lib/daemon/index.js", "-c", "/opt/config/daemon.json", "-v"]
   runner:
-    image: syzoj/syzoj:base
+    # image: syzoj/syzoj:base     
+    image: registry.cn-hangzhou.aliyuncs.com/philogag/syzoj:debug
     networks:
       - net
     volumes:
