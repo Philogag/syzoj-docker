@@ -38,8 +38,8 @@ services:
       - 5283:5283
     restart: always
   judger:
-    # image: syzoj/syzoj:base
-    image: registry.cn-hangzhou.aliyuncs.com/philogag/syzoj:debug
+    image: syzoj/syzoj:base
+    # image: registry.cn-hangzhou.aliyuncs.com/philogag/syzoj:debug
     networks:
       - net
     depends_on:
@@ -50,8 +50,8 @@ services:
     working_dir: "/opt/judge-v3"
     command: ["node", "/opt/judge-v3/lib/daemon/index.js", "-c", "/opt/config/daemon.json", "-v"]
   runner:
-    # image: syzoj/syzoj:base     
-    image: registry.cn-hangzhou.aliyuncs.com/philogag/syzoj:debug
+    image: syzoj/syzoj:base     
+    # image: registry.cn-hangzhou.aliyuncs.com/philogag/syzoj:debug
     networks:
       - net
     volumes:
