@@ -23,7 +23,7 @@ services:
       - net
   syzoj:
     # image: syzoj/syzoj:base
-    image: registry.cn-hangzhou.aliyuncs.com/philogag/syzoj:debug
+    image: registry.cn-hangzhou.aliyuncs.com/philogag/syzoj:alpine-web-only
     networks:
       - net
     depends_on:
