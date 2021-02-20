@@ -7,4 +7,5 @@ RUN apk add p7zip clang py3-pygments tzdata git\
     && apk del tzdata \
     && git clone -b debug https://github.com/Philogag/syzoj /opt/syzoj \
     && cd /opt/syzoj \
-    && yarn
+    && yarn \
+    && yarn cache clean
