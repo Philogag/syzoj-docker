@@ -1,21 +1,15 @@
-FROM node:8
+FROM node:10.23.3-alpine3.11
 
-# fix tzdata install problem
-ENV DEBIAN_FRONTEND noninteractive
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && apk add p7zip clang py3-pygments tzdata \
+    && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+    && apk del tzdata
 
-# RUN apt-get update -y && apt-get install -y ca-certificates curl gnupg && \
-#     echo "deb https://deb.nodesource.com/node_8.x bionic main" >> /etc/apt/sources.list.d/nodesource.list && \
-#     echo "deb-src https://deb.nodesource.com/node_8.x bionic main" >> /etc/apt/sources.list.d/nodesource.list && \
-#     curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
-# RUN apt-get update -y &&\
-#     apt-get install -y nodejs &&\
-#     whereis node &&\
-#     whereis npm
+RUN apk add git \
+    && git clone -b debug https://github.com/Philogag/syzoj /opt/syzoj \
+    && apk del git
 
-RUN apt-get update -y && apt-get install -y p7zip-full clang-format python-pygments gcc g++ make libboost-filesystem-dev git
-
-RUN git clone -b debug https://github.com/Philogag/syzoj /opt/syzoj
-
-WORKDIR /opt/syzoj
-RUN npm install && (node_modules/.bin/tsc || true)
+RUN cd /opt/syzoj \
+    && npm install \
+    && (./node_modules/.bin/tsc || true) \
+    && npm cache verify
 WORKDIR /
