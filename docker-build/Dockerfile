@@ -1,4 +1,4 @@
-FROM node:10.23.3-alpine3.11
+FROM node:8-alpine3.11
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && apk add p7zip clang py3-pygments tzdata \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
