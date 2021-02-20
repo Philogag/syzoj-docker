@@ -2,14 +2,6 @@
   "title": "SYZOJ",
   "hostname": "0.0.0.0",
   "port": "5283",
-  "db": {
-    "database": "syzoj",
-    "username": "syzoj",
-    "password": "123456",
-    "host": "mysql",
-    "migrated_to_typeorm": true,
-    "cache_size": 1000
-  },
   "logo": {
     "url": null,
     "width": null,
